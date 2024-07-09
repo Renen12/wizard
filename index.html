@@ -10,13 +10,13 @@
 
 <body>
     <div class="content">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
-            alt="" id="pokemon1" height="500" width="500" class="pokemon1">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
-            alt="" id="pokemon2" height="500" width="500" class="pokemon2">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
-            alt="" id="pokemon3" height="500" width="500" class="pokemon3">
-        <script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png" alt="" id="pokemon1"
+            height="500" width="500" class="pokemon1">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png" alt="" id="pokemon2"
+            height="500" width="500" class="pokemon2">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png" alt="" id="pokemon3"
+            height="500" width="500" class="pokemon3">
+        <script src="https://cdn.jsdelivr.net/npm/@simondmc/popup-js@1.4.3/popup.min.js"></script>
         <script src="node_modules/js-sha256/src/sha256.js"></script>
         <script>
             let compareto;
@@ -33,6 +33,16 @@
             }
             let unique = []
             let vibe = false
+            let pokemans = {
+                "1": "",
+                "2": "",
+                "3": "",
+            }
+            let generations = {
+                "1": "",
+                "2": "",
+                "3": "",
+            }
             onkeydown = (key) => {
                 if (key.key == "v") {
                     vibe = true
@@ -43,7 +53,7 @@
                         let shiny = Math.floor(Math.random * 4096) + 1
                         let rand = Math.floor(Math.random() * 1025) + 1
                         // unique in current pair
-                        unique.forEach(function(item){
+                        unique.forEach(function (item) {
                             if (rand == item) {
                                 rand = Math.floor(Math.random() * 1025) + 1
                             }
@@ -69,13 +79,41 @@
                                     document.getElementById("pokemon" + i).src = sprite
                                     console.log(data.name)
                                 }
+                                pokemans["" + i] = data.name
                             })
                         });
                     }
                 }
-                unique.forEach(function(item){
+                unique.forEach(function (item) {
                     item = 0
                 })
+            }
+            let p1 = document.getElementById("pokemon1")
+            let p2 = document.getElementById("pokemon2")
+            let p3 = document.getElementById("pokemon3")
+            p1.onclick = () => {
+                const name1 = new Popup({
+                    id: "name1",
+                    title: "General information about " + pokemans["1"],
+                    content: pokemans["1"]
+                });
+                name1.show()
+            }
+            p2.onclick = () => {
+                const name2 = new Popup({
+                    id: "name2",
+                    title: "General information about " + pokemans["2"],
+                    content: pokemans["2"]
+                });
+                name2.show()
+            }
+            p3.onclick = () => {
+                const name3 = new Popup({
+                    id: "name3",
+                    title: "General information about " + pokemans["3"],
+                    content: pokemans["3"]
+                });
+                name3.show()
             }
         </script>
     </div>
