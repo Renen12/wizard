@@ -32,13 +32,7 @@
                 document.write("Wrong password")
             }
             let unique = []
-            let vibe = false
             let pokemans = {
-                "1": "",
-                "2": "",
-                "3": "",
-            }
-            let generations = {
                 "1": "",
                 "2": "",
                 "3": "",
@@ -49,9 +43,6 @@
                 "3": "",
             }
             onkeydown = (key) => {
-                if (key.key == "v") {
-                    vibe = true
-                }
                 if (key.key == "Enter") {
                     // don't touch for heaven's sake
                     for (let i = 1; i < 4; i++) {
@@ -71,12 +62,8 @@
                         pkmn.then((obj) => {
                             let stuff = obj.json()
                             stuff.then((data) => {
+
                                 let sprite = data.sprites.front_default
-                                if (vibe == true) {
-                                    setInterval(() => {
-                                        document.getElementById("pokemon" + i).src = data.sprites.back_default
-                                    }, 1000);
-                                }
                                 if (shiny == 4096) {
                                     document.getElementById("pokemon" + i).src = data.sprites.front_shiny
                                     console.log(`A shiny ${data.name} has appeared!`)
@@ -85,9 +72,7 @@
                                     console.log(data.name)
                                 }
                                 pokemans["" + i] = data.name
-                                generations["" + i] = data.game_indices["0"].version.name
                                 cries["" + i] = data.cries.latest
-                                console.log(generations)
                             })
                         });
                     }
@@ -102,9 +87,10 @@
             p1.onclick = () => {
                 const name1 = new Popup({
                     id: "name1",
-                    title: pokemans["1"],
-                    content: `${pokemans["1"]} is from Pokémon ${generations["1"]}
-                    <audio src="${cries["1"]}" controls></audio>
+                    title: pokemans["1"] || "MissingNo",
+                    content: `
+                    <audio src="${cries["1"] || "error.mp3"}" controls></audio>
+                    <button type="button">Add to your team</button>
                     `
                 });
                 name1.show()
@@ -112,9 +98,10 @@
             p2.onclick = () => {
                 const name2 = new Popup({
                     id: "name2",
-                    title: pokemans["2"],
-                    content: `${pokemans["2"]} is from Pokémon ${generations["2"]}
-                    <audio src="${cries["2"]}" controls></audio>
+                    title: pokemans["2"] || "MissingNo",
+                    content: `
+                    <audio src="${cries["2"] || "error.mp3"}" controls></audio>
+                    <button type="button">Add to your team</button>
                     `
                 });
                 name2.show()
@@ -122,9 +109,10 @@
             p3.onclick = () => {
                 const name3 = new Popup({
                     id: "name3",
-                    title: pokemans["3"],
-                    content: `${pokemans["3"]} is from Pokémon ${generations["3"]}
-                    <audio src="${cries["3"]}" controls></audio>
+                    title: pokemans["3"] || "MissingNo",
+                    content: `
+                    <audio src="${cries["3"] || "error.mp3"}" controls></audio>
+                    <button type="button">Add to your team</button>
                     `
                 });
                 name3.show()
