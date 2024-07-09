@@ -11,22 +11,27 @@
 <body>
     <div class="content">
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
-            alt="" id="pokemon1" height="200" width="200">
+            alt="" id="pokemon1" height="500" width="500" class="pokemon1">
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
-            alt="" id="pokemon2" height="200" width="200">
+            alt="" id="pokemon2" height="500" width="500" class="pokemon2">
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
-            alt="" id="pokemon3" height="200" width="200">
+            alt="" id="pokemon3" height="500" width="500" class="pokemon3">
         <script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
         <script src="node_modules/js-sha256/src/sha256.js"></script>
         <script>
+            let compareto;
             let hash = "2337b9383b11177f67481f46b82f948ebfb397d7a330ece26b2d5548ba2996ba"
-            let compareto = sha256(prompt("Enter password:", ""))
+            try {
+                compareto = sha256(prompt("Enter password:", ""))
+            } catch (e) {
+                document.location = ""
+                document.write("Wrong password")
+            }
             if (compareto !== hash) {
                 document.location = ""
                 document.write("Wrong password")
             }
             let unique = []
-            let notseen = []
             let vibe = false
             onkeydown = (key) => {
                 if (key.key == "v") {

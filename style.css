@@ -1,6 +1,14 @@
+html, body, .content {
+    height: 100%;
+}
+
 .content {
-    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+body {
+    background-image: url(background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
