@@ -11,16 +11,20 @@
 <body>
     <div class="content">
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
-            alt="An image of a pokemon starter" id="pokemon1" height="200" width="200">
+            alt="" id="pokemon1" height="200" width="200">
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
-            alt="An image of a pokemon starter" id="pokemon2" height="200" width="200">
+            alt="" id="pokemon2" height="200" width="200">
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
-            alt="An image of a pokemon starter" id="pokemon3" height="200" width="200">
+            alt="" id="pokemon3" height="200" width="200">
         <script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
         <script>
             let unique = []
             let notseen = []
+            let vibe = false
             onkeydown = (key) => {
+                if (key.key == "v") {
+                    vibe = true
+                }
                 if (key.key == "Enter") {
                     // don't touch for heaven's sake
                     for (let i = 1; i < 4; i++) {
@@ -40,6 +44,11 @@
                             let stuff = obj.json()
                             stuff.then((data) => {
                                 let sprite = data.sprites.front_default
+                                if (vibe == true) {
+                                    setInterval(() => {
+                                        document.getElementById("pokemon" + i).src = data.sprites.back_default
+                                    }, 1000);
+                                }
                                 document.getElementById("pokemon" + i).src = sprite
                                 console.log(data.name)
                             })
