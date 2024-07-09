@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <title>
+        Wizard
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="content">
+        <img src="" alt="An image of a pokemon starter" id="pokemon1" height="200" width="200">
+        <img src="" alt="An image of a pokemon starter" id="pokemon2" height="200" width="200">
+        <img src="" alt="An image of a pokemon starter" id="pokemon3" height="200" width="200">
+        <script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
+        <script>
+            onkeydown = (key) => {
+                if (key.key == "Enter") {
+                    // don't touch for heaven's sake
+                    for (let i = 1; i < 4; i++) {
+                        let rand = Math.floor(Math.random() * 1025) + 1
+                        let pkmn = fetch('https://pokeapi.co/api/v2/pokemon/' + rand.toString())
+                        pkmn.then((obj) => {
+                            let stuff = obj.json()
+                            stuff.then((data) => {
+                                let sprite = data.sprites.front_default
+                                document.getElementById("pokemon" + i).src = sprite
+                            })
+                        });
+                    }
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</html>
