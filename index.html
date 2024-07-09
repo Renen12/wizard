@@ -28,6 +28,7 @@
                 if (key.key == "Enter") {
                     // don't touch for heaven's sake
                     for (let i = 1; i < 4; i++) {
+                        let shiny = Math.floor(Math.random * 4096) + 1
                         let rand = Math.floor(Math.random() * 1025) + 1
                         // unique in current pair
                         unique.forEach(function(item){
@@ -49,8 +50,13 @@
                                         document.getElementById("pokemon" + i).src = data.sprites.back_default
                                     }, 1000);
                                 }
-                                document.getElementById("pokemon" + i).src = sprite
-                                console.log(data.name)
+                                if (shiny == 4096) {
+                                    document.getElementById("pokemon" + i).src = data.sprites.front_shiny
+                                    console.log(`A shiny ${data.name} has appeared!`)
+                                } else {
+                                    document.getElementById("pokemon" + i).src = sprite
+                                    console.log(data.name)
+                                }
                             })
                         });
                     }
