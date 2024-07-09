@@ -11,8 +11,8 @@ body {
     width: 40%;
 }
 .enter {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
 }

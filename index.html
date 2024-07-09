@@ -10,26 +10,45 @@
 
 <body>
     <div class="content">
-        <img src="" alt="An image of a pokemon starter" id="pokemon1" height="200" width="200">
-        <img src="" alt="An image of a pokemon starter" id="pokemon2" height="200" width="200">
-        <img src="" alt="An image of a pokemon starter" id="pokemon3" height="200" width="200">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
+            alt="An image of a pokemon starter" id="pokemon1" height="200" width="200">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
+            alt="An image of a pokemon starter" id="pokemon2" height="200" width="200">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
+            alt="An image of a pokemon starter" id="pokemon3" height="200" width="200">
         <script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
         <script>
+            let unique = []
+            let notseen = []
             onkeydown = (key) => {
                 if (key.key == "Enter") {
                     // don't touch for heaven's sake
                     for (let i = 1; i < 4; i++) {
                         let rand = Math.floor(Math.random() * 1025) + 1
+                        // unique in current pair
+                        unique.forEach(function(item){
+                            if (rand == item) {
+                                rand = Math.floor(Math.random() * 1025) + 1
+                            }
+                        })
+                        unique.push(rand)
                         let pkmn = fetch('https://pokeapi.co/api/v2/pokemon/' + rand.toString())
+                        document.getElementById("pokemon1").src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
+                        document.getElementById("pokemon2").src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
+                        document.getElementById("pokemon3").src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
                         pkmn.then((obj) => {
                             let stuff = obj.json()
                             stuff.then((data) => {
                                 let sprite = data.sprites.front_default
                                 document.getElementById("pokemon" + i).src = sprite
+                                console.log(data.name)
                             })
                         });
                     }
                 }
+                unique.forEach(function(item){
+                    item = 0
+                })
             }
         </script>
     </div>
