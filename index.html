@@ -19,6 +19,22 @@
         <script src="https://cdn.jsdelivr.net/npm/@simondmc/popup-js@1.4.3/popup.min.js"></script>
         <script src="node_modules/js-sha256/src/sha256.js"></script>
         <script>
+            function waitForElement(selector, callback) {
+                // Initialize a mutation observer
+                var observer = new MutationObserver(function (mutations, me) {
+                    // Query for the element
+                    var element = document.querySelector(selector);
+                    if (element) {
+                        callback(element);
+                        // Once the element has been found, we can stop observing for mutations
+                        me.disconnect();
+                        return;
+                    }
+                });
+
+                // Start observing the document with the configured parameters
+                observer.observe(document, { childList: true, subtree: true });
+            }
             let compareto;
             let hash = "2337b9383b11177f67481f46b82f948ebfb397d7a330ece26b2d5548ba2996ba"
             try {
@@ -90,7 +106,7 @@
                     title: pokemans["1"] || "MissingNo",
                     content: `
                     <audio src="${cries["1"] || "error.mp3"}" controls></audio>
-                    <button type="button">Add to your team</button>
+                    <button type="button" class="team1" id="team1">Add to your team</button>
                     `
                 });
                 name1.show()
@@ -101,7 +117,7 @@
                     title: pokemans["2"] || "MissingNo",
                     content: `
                     <audio src="${cries["2"] || "error.mp3"}" controls></audio>
-                    <button type="button">Add to your team</button>
+                    <button type="button" class="team2" id="team2">Add to your team</button>
                     `
                 });
                 name2.show()
@@ -112,12 +128,27 @@
                     title: pokemans["3"] || "MissingNo",
                     content: `
                     <audio src="${cries["3"] || "error.mp3"}" controls></audio>
-                    <button type="button">Add to your team</button>
+                    <button type="button" class="team3" id="team3">Add to your team</button>
                     `
                 });
                 name3.show()
             }
             // TODO: Add a pokemon "cart" and team composition?
+            waitForElement(".team1", function(){
+                document.getElementById("team1").onclick = () => {
+                    //
+                }
+            })
+            waitForElement(".team2", function(){
+                document.getElementById("team2").onclick = () => {
+                    //
+                }
+            })
+            waitForElement(".team3", function(){
+                document.getElementById("team3").onclick = () => {
+                    //
+                }
+            })
         </script>
     </div>
 </body>
