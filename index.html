@@ -93,6 +93,11 @@
                     `
                 });
                 name1.show()
+                document.onkeydown = (k) => {
+                    if (k.key == "Escape") {
+                        name1.hide()
+                    }
+                }
             }
             p2.onclick = () => {
                 const name2 = new Popup({
@@ -103,6 +108,11 @@
                     `
                 });
                 name2.show()
+                document.onkeydown = (k) => {
+                    if (k.key == "Escape") {
+                        name2.hide()
+                    }
+                }
             }
             p3.onclick = () => {
                 const name3 = new Popup({
@@ -113,6 +123,11 @@
                     `
                 });
                 name3.show()
+                document.onkeydown = (k) => {
+                    if (k.key == "Escape") {
+                        name3.hide()
+                    }
+                }
             }
             // TODO: Add a pokemon "cart" and team composition?
         </script>
