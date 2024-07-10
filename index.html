@@ -134,19 +134,21 @@
                 name3.show()
             }
             // TODO: Add a pokemon "cart" and team composition?
+            // storage
+            localStorage.setItem("team", "")
             waitForElement(".team1", function(){
                 document.getElementById("team1").onclick = () => {
-                    //
+                    localStorage.setItem("team", localStorage.getItem("team") + "\n" + pokemans["1"])
                 }
             })
             waitForElement(".team2", function(){
                 document.getElementById("team2").onclick = () => {
-                    //
+                    localStorage.setItem("team", localStorage.getItem("team") + "\n" + pokemans["2"])
                 }
             })
             waitForElement(".team3", function(){
                 document.getElementById("team3").onclick = () => {
-                    //
+                    localStorage.setItem("team", localStorage.getItem("team") + "\n" + pokemans["3"])
                 }
             })
         </script>
