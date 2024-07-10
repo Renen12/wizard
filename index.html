@@ -1,156 +1,142 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>
-        Wizard
-    </title>
+    <meta charset="UTF-8">
+    <title>Wizard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="content">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png" alt="" id="pokemon1"
-            height="500" width="500" class="pokemon1">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png" alt="" id="pokemon2"
-            height="500" width="500" class="pokemon2">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png" alt="" id="pokemon3"
-            height="500" width="500" class="pokemon3">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png" alt="" id="pokemon1" height="500" width="500" class="pokemon1">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png" alt="" id="pokemon2" height="500" width="500" class="pokemon2">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png" alt="" id="pokemon3" height="500" width="500" class="pokemon3">
         <script src="https://cdn.jsdelivr.net/npm/@simondmc/popup-js@1.4.3/popup.min.js"></script>
         <script src="node_modules/js-sha256/src/sha256.js"></script>
         <script>
             function waitForElement(selector, callback) {
-                // Initialize a mutation observer
                 var observer = new MutationObserver(function (mutations, me) {
-                    // Query for the element
                     var element = document.querySelector(selector);
                     if (element) {
                         callback(element);
-                        // Once the element has been found, we can stop observing for mutations
                         me.disconnect();
                         return;
                     }
                 });
-
-                // Start observing the document with the configured parameters
                 observer.observe(document, { childList: true, subtree: true });
             }
+
             let compareto;
-            let hash = "2337b9383b11177f67481f46b82f948ebfb397d7a330ece26b2d5548ba2996ba"
+            let hash = "2337b9383b11177f67481f46b82f948ebfb397d7a330ece26b2d5548ba2996ba";
             try {
-                compareto = sha256(prompt("Enter password:", ""))
+                compareto = sha256(prompt("Enter password:", ""));
             } catch (e) {
-                document.location = ""
-                document.write("Wrong password")
+                document.location = "";
+                document.write("Wrong password");
             }
             if (compareto !== hash) {
-                document.location = ""
-                document.write("Wrong password")
+                document.location = "";
+                document.write("Wrong password");
             }
-            let unique = []
-            let pokemans = {
-                "1": "",
-                "2": "",
-                "3": "",
-            }
-            let cries = {
-                "1": "",
-                "2": "",
-                "3": "",
-            }
-            onkeydown = (key) => {
-                if (key.key == "Enter") {
-                    // don't touch for heaven's sake
-                    for (let i = 1; i < 4; i++) {
-                        let shiny = Math.floor(Math.random * 4096) + 1
-                        let rand = Math.floor(Math.random() * 1025) + 1
-                        // unique in current pair
-                        unique.forEach(function (item) {
-                            if (rand == item) {
-                                rand = Math.floor(Math.random() * 1025) + 1
-                            }
-                        })
-                        unique.push(rand)
-                        let pkmn = fetch('https://pokeapi.co/api/v2/pokemon/' + rand.toString())
-                        document.getElementById("pokemon1").src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
-                        document.getElementById("pokemon2").src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
-                        document.getElementById("pokemon3").src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
-                        pkmn.then((obj) => {
-                            let stuff = obj.json()
-                            stuff.then((data) => {
 
-                                let sprite = data.sprites.front_default
-                                if (shiny == 4096) {
-                                    document.getElementById("pokemon" + i).src = data.sprites.front_shiny
-                                    console.log(`A shiny ${data.name} has appeared!`)
-                                } else {
-                                    document.getElementById("pokemon" + i).src = sprite
-                                    console.log(data.name)
-                                }
-                                pokemans["" + i] = data.name
-                                cries["" + i] = data.cries.latest
-                            })
+            let unique = [];
+            let pokemans = { "1": "", "2": "", "3": "" };
+            let cries = { "1": "", "2": "", "3": "" };
+
+            function fetchPokemon() {
+                for (let i = 1; i < 4; i++) {
+                    let shiny = Math.floor(Math.random() * 4096) + 1;
+                    let rand = Math.floor(Math.random() * 1025) + 1;
+
+                    unique.forEach(function (item) {
+                        if (rand === item) {
+                            rand = Math.floor(Math.random() * 1025) + 1;
+                        }
+                    });
+                    unique.push(rand);
+
+                    fetch('https://pokeapi.co/api/v2/pokemon/' + rand)
+                        .then(response => response.json())
+                        .then(data => {
+                            let sprite = data.sprites.front_default;
+                            if (shiny === 4096) {
+                                document.getElementById("pokemon" + i).src = data.sprites.front_shiny;
+                                console.log(`A shiny ${data.name} has appeared!`);
+                            } else {
+                                document.getElementById("pokemon" + i).src = sprite;
+                                console.log(data.name);
+                            }
+                            pokemans[i.toString()] = data.name;
+                            cries[i.toString()] = data.sounds ? data.sounds.latest : "error.mp3";
                         });
-                    }
                 }
-                unique.forEach(function (item) {
-                    item = 0
-                })
+                unique = [];
             }
-            let p1 = document.getElementById("pokemon1")
-            let p2 = document.getElementById("pokemon2")
-            let p3 = document.getElementById("pokemon3")
-            p1.onclick = () => {
+
+            document.onkeydown = (event) => {
+                if (event.key === "Enter") {
+                    fetchPokemon();
+                }
+            };
+
+            window.onload = fetchPokemon;
+
+            document.getElementById("pokemon1").onclick = () => {
                 const name1 = new Popup({
                     id: "name1",
                     title: pokemans["1"] || "MissingNo",
                     content: `
-                    <audio src="${cries["1"] || "error.mp3"}" controls></audio>
-                    <button type="button" class="team1" id="team1">Add to your team</button>
+                        <audio src="${cries["1"] || "error.mp3"}" controls></audio>
+                        <button type="button" class="team1" id="team1">Add to your team</button>
                     `
                 });
-                name1.show()
-            }
-            p2.onclick = () => {
+                name1.show();
+            };
+
+            document.getElementById("pokemon2").onclick = () => {
                 const name2 = new Popup({
                     id: "name2",
                     title: pokemans["2"] || "MissingNo",
                     content: `
-                    <audio src="${cries["2"] || "error.mp3"}" controls></audio>
-                    <button type="button" class="team2" id="team2">Add to your team</button>
+                        <audio src="${cries["2"] || "error.mp3"}" controls></audio>
+                        <button type="button" class="team2" id="team2">Add to your team</button>
                     `
                 });
-                name2.show()
-            }
-            p3.onclick = () => {
+                name2.show();
+            };
+
+            document.getElementById("pokemon3").onclick = () => {
                 const name3 = new Popup({
                     id: "name3",
                     title: pokemans["3"] || "MissingNo",
                     content: `
-                    <audio src="${cries["3"] || "error.mp3"}" controls></audio>
-                    <button type="button" class="team3" id="team3">Add to your team</button>
+                        <audio src="${cries["3"] || "error.mp3"}" controls></audio>
+                        <button type="button" class="team3" id="team3">Add to your team</button>
                     `
                 });
-                name3.show()
-            }
-            // TODO: Add a pokemon "cart" and team composition?
-            // storage
-            localStorage.setItem("team", "")
-            waitForElement(".team1", function(){
+                name3.show();
+            };
+
+            localStorage.setItem("team", "");
+            waitForElement(".team1", function () {
                 document.getElementById("team1").onclick = () => {
-                    localStorage.setItem("team", localStorage.getItem("team") + "\n" + pokemans["1"])
-                }
-            })
-            waitForElement(".team2", function(){
+                    localStorage.setItem("team", localStorage.getItem("team") + "\n" + pokemans["1"]);
+                };
+            });
+
+            waitForElement(".team2", function () {
                 document.getElementById("team2").onclick = () => {
-                    localStorage.setItem("team", localStorage.getItem("team") + "\n" + pokemans["2"])
-                }
-            })
-            waitForElement(".team3", function(){
+                    localStorage.setItem("team", localStorage.getItem("team") + "\n" + pokemans["2"]);
+                };
+            });
+
+            waitForElement(".team3", function () {
                 document.getElementById("team3").onclick = () => {
-                    localStorage.setItem("team", localStorage.getItem("team") + "\n" + pokemans["3"])
-                }
-            })
+                    localStorage.setItem("team", localStorage.getItem("team") + "\n" + pokemans["3"]);
+                };
+            });
         </script>
     </div>
 </body>
