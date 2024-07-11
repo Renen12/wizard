@@ -96,6 +96,7 @@
             let p1 = document.getElementById("pokemon1")
             let p2 = document.getElementById("pokemon2")
             let p3 = document.getElementById("pokemon3")
+            // add alternate forms fix
             p1.onclick = () => {
                 const name1 = new Popup({
                     id: "name1",
@@ -103,12 +104,14 @@
                     content: `
                     <audio src="${cries["1"] || "error.mp3"}" controls></audio>
                     <p> Abilities: ${abilities["1"] || "Break the game"}</p>
+                    <a href="https://pokemondb.net/pokedex/${pokemans["1"].split("-")[0] || ""}" target="_blank">More information</a>
                     `
                 });
                 name1.show()
                 document.onkeydown = (k) => {
                     if (k.key == "Escape") {
                         name1.hide()
+                        document.activeElement.blur()
                     }
                 }
             }
@@ -119,12 +122,14 @@
                     content: `
                     <audio src="${cries["2"] || "error.mp3"}" controls></audio>
                     <p> Abilities: ${abilities["2"] || "Break the game"}</p>
+                    <a href="https://pokemondb.net/pokedex/${pokemans["2"].split("-")[0] || ""}" target="_blank">More information</a>
                     `
                 });
                 name2.show()
                 document.onkeydown = (k) => {
                     if (k.key == "Escape") {
                         name2.hide()
+                        document.activeElement.blur()
                     }
                 }
             }
@@ -135,12 +140,14 @@
                     content: `
                     <audio src="${cries["3"] || "error.mp3"}" controls></audio>
                     <p> Abilities: ${abilities["3"] || "Break the game"}</p>
+                    <a href="https://pokemondb.net/pokedex/${pokemans["3"].split("-")[0] || ""}" target="_blank">More information</a>
                     `
                 });
                 name3.show()
                 document.onkeydown = (k) => {
                     if (k.key == "Escape") {
                         name3.hide()
+                        document.activeElement.blur()
                     }
                 }
             }
