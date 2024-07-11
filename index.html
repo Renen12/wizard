@@ -22,18 +22,6 @@
             let url1 = ""
             let url2 = ""
             let url3 = ""
-            let compareto;
-            let hash = "2337b9383b11177f67481f46b82f948ebfb397d7a330ece26b2d5548ba2996ba"
-            try {
-                compareto = sha256(prompt("Enter password:", ""))
-            } catch (e) {
-                document.location = ""
-                document.write("Wrong password")
-            }
-            if (compareto !== hash) {
-                document.location = ""
-                document.write("Wrong password")
-            }
             let unique = []
             let pokemans = {
                 "1": "",
@@ -51,6 +39,16 @@
                 "3": "",
             }
             let defaults = {
+                "1": "",
+                "2": "",
+                "3": "",
+            }
+            let weights = {
+                "1": "",
+                "2": "",
+                "3": "",
+            }
+            let heights = {
                 "1": "",
                 "2": "",
                 "3": "",
@@ -87,6 +85,8 @@
                                 }
                                 pokemans["" + i] = data.name
                                 cries["" + i] = data.cries.latest
+                                weights["" + i] = data.weight
+                                heights["" + i] = data.height
                                 let index = 0;
                                 for (ability in data.abilities) {
                                     console.log(data.abilities[`${index}`])
@@ -137,6 +137,8 @@
                     content: `
                     <audio src="${cries["1"] || "error.mp3"}" controls></audio>
                     <p> Abilities: ${abilities["1"] || "Break the game"}</p>
+                    <p> Height: ${heights["1"] * 3.93701 || "???"} inches</p>
+                    <p> Weight: ${weights["1"] * 0.2204622622 || "???"} pounds </p>
                     <a href="${url1}"target="_blank">More information</a>
                     `
                 });
@@ -155,6 +157,8 @@
                     content: `
                     <audio src="${cries["2"] || "error.mp3"}" controls></audio>
                     <p> Abilities: ${abilities["2"] || "Break the game"}</p>
+                    <p> Height: ${heights["2"] * 3.93701 || "???"} inches</p>
+                    <p> Weight: ${weights["2"] * 0.2204622622 || "???"} pounds </p>
                     <a href="${url2}" target="_blank">More information</a>
                     `
                 });
@@ -173,6 +177,8 @@
                     content: `
                     <audio src="${cries["3"] || "error.mp3"}" controls></audio>
                     <p> Abilities: ${abilities["3"] || "Break the game"}</p>
+                    <p> Height: ${heights["3"] * 3.93701 || "???"} inches</p>
+                    <p> Weight: ${weights["3"] * 0.2204622622|| "???"} pounds </p>
                     <a href="${url3}" target="_blank">More information</a>
                     `
                 });
