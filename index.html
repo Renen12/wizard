@@ -93,6 +93,14 @@
                                     abilities["" + i] = abilities["" + i] + data.abilities[`${index}`].ability.name.replace("-", " ") + " "
                                     index++
                                 }
+                                let secondindex = 0
+                                for (a in abilities) {
+                                    if (abilities[secondindex] != a) {
+                                        secondindex++
+                                    } else {
+                                        abilities[secondindex] = data.abilities[0]
+                                    }
+                                }
                                 defaults["" + i] = data.is_default
                                 if (defaults["1"] == false) {
                                     url1 = "https://pokemondb.net/pokedex/" + pokemans["1"].split("-")[0]
@@ -110,6 +118,7 @@
                                     url3 = "https://pokemondb.net/pokedex/" + pokemans["3"]
                                 }
                                 console.log(url1, url2, url3)
+                                console.log(defaults)
                             })
                         });
                     }
@@ -121,7 +130,6 @@
             let p1 = document.getElementById("pokemon1")
             let p2 = document.getElementById("pokemon2")
             let p3 = document.getElementById("pokemon3")
-            // add alternate forms fix
             p1.onclick = () => {
                 const name1 = new Popup({
                     id: "name1",
