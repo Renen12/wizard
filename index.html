@@ -19,6 +19,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@simondmc/popup-js@1.4.3/popup.min.js"></script>
         <script src="node_modules/js-sha256/src/sha256.js"></script>
         <script>
+            let url1 = ""
+            let url2 = ""
+            let url3 = ""
             let compareto;
             let hash = "2337b9383b11177f67481f46b82f948ebfb397d7a330ece26b2d5548ba2996ba"
             try {
@@ -43,6 +46,11 @@
                 "3": "",
             }
             let abilities = {
+                "1": "",
+                "2": "",
+                "3": "",
+            }
+            let defaults = {
                 "1": "",
                 "2": "",
                 "3": "",
@@ -85,6 +93,23 @@
                                     abilities["" + i] = abilities["" + i] + data.abilities[`${index}`].ability.name.replace("-", " ") + " "
                                     index++
                                 }
+                                defaults["" + i] = data.is_default
+                                if (defaults["1"] == false) {
+                                    url1 = "https://pokemondb.net/pokedex/" + pokemans["1"].split("-")[0]
+                                } else {
+                                    url1 = "https://pokemondb.net/pokedex/" + pokemans["1"]
+                                }
+                                if (defaults["2"] == false) {
+                                    url2 = "https://pokemondb.net/pokedex/" + pokemans["2"].split("-")[0]
+                                } else {
+                                    url2 = "https://pokemondb.net/pokedex/" + pokemans["2"]
+                                }
+                                if (defaults["3"] == false) {
+                                    url3 = "https://pokemondb.net/pokedex/" + pokemans["3"].split("-")[0]
+                                } else {
+                                    url3 = "https://pokemondb.net/pokedex/" + pokemans["3"]
+                                }
+                                console.log(url1, url2, url3)
                             })
                         });
                     }
@@ -104,7 +129,7 @@
                     content: `
                     <audio src="${cries["1"] || "error.mp3"}" controls></audio>
                     <p> Abilities: ${abilities["1"] || "Break the game"}</p>
-                    <a href="https://pokemondb.net/pokedex/${pokemans["1"].split("-")[0] || ""}" target="_blank">More information</a>
+                    <a href="${url1}"target="_blank">More information</a>
                     `
                 });
                 name1.show()
@@ -122,7 +147,7 @@
                     content: `
                     <audio src="${cries["2"] || "error.mp3"}" controls></audio>
                     <p> Abilities: ${abilities["2"] || "Break the game"}</p>
-                    <a href="https://pokemondb.net/pokedex/${pokemans["2"].split("-")[0] || ""}" target="_blank">More information</a>
+                    <a href="${url2}" target="_blank">More information</a>
                     `
                 });
                 name2.show()
@@ -140,7 +165,7 @@
                     content: `
                     <audio src="${cries["3"] || "error.mp3"}" controls></audio>
                     <p> Abilities: ${abilities["3"] || "Break the game"}</p>
-                    <a href="https://pokemondb.net/pokedex/${pokemans["3"].split("-")[0] || ""}" target="_blank">More information</a>
+                    <a href="${url3}" target="_blank">More information</a>
                     `
                 });
                 name3.show()
