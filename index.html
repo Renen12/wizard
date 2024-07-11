@@ -42,10 +42,16 @@
                 "2": "",
                 "3": "",
             }
+            let abilities = {
+                "1": "",
+                "2": "",
+                "3": "",
+            }
             onkeydown = (key) => {
                 if (key.key == "Enter") {
                     // don't touch for heaven's sake
                     for (let i = 1; i < 4; i++) {
+                        abilities["" + i] = ""
                         let shiny = Math.floor(Math.random * 4096) + 1
                         let rand = Math.floor(Math.random() * 1025) + 1
                         // unique in current pair
@@ -73,6 +79,12 @@
                                 }
                                 pokemans["" + i] = data.name
                                 cries["" + i] = data.cries.latest
+                                let index = 0;
+                                for (ability in data.abilities) {
+                                    console.log(data.abilities[`${index}`])
+                                    abilities["" + i] = abilities["" + i] + data.abilities[`${index}`].ability.name.replace("-", " ") + " "
+                                    index++
+                                }
                             })
                         });
                     }
@@ -90,6 +102,7 @@
                     title: pokemans["1"] || "MissingNo",
                     content: `
                     <audio src="${cries["1"] || "error.mp3"}" controls></audio>
+                    <p> Abilities: ${abilities["1"] || "Break the game"}</p>
                     `
                 });
                 name1.show()
@@ -105,6 +118,7 @@
                     title: pokemans["2"] || "MissingNo",
                     content: `
                     <audio src="${cries["2"] || "error.mp3"}" controls></audio>
+                    <p> Abilities: ${abilities["2"] || "Break the game"}</p>
                     `
                 });
                 name2.show()
@@ -120,6 +134,7 @@
                     title: pokemans["3"] || "MissingNo",
                     content: `
                     <audio src="${cries["3"] || "error.mp3"}" controls></audio>
+                    <p> Abilities: ${abilities["3"] || "Break the game"}</p>
                     `
                 });
                 name3.show()
@@ -129,7 +144,6 @@
                     }
                 }
             }
-            // TODO: Add a pokemon "cart" and team composition?
         </script>
     </div>
 </body>
