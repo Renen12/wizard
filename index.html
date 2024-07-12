@@ -53,6 +53,16 @@
                 "2": "",
                 "3": "",
             }
+            let highestsstats = {
+                "1": "",
+                "2": "",
+                "3": "",
+            }
+            let highestsstatsnames = {
+                "1": "",
+                "2": "",
+                "3": "",
+            }
             onkeydown = (key) => {
                 //todo: encounter locations, unique for every round, abillity randomizer and stuff
                 if (key.key == "Enter") {
@@ -75,7 +85,18 @@
                         pkmn.then((obj) => {
                             let stuff = obj.json()
                             stuff.then((data) => {
-
+                                let bsts = []
+                                for (let bst = 0; bst < 5; bst++) {
+                                    bsts.push(data.stats["" + bst].base_stat)
+                                }
+                                let highest = Math.max.apply(Math, bsts);
+                                console.log(highest, data.stats)
+                                for (let s = 0; s < 6; s++) {
+                                    //maybe wrong
+                                    if (data.stats["" + s].base_stat == highest) {
+                                        highestsstatsnames["" + i] = data.stats["" + s].stat.name
+                                    }
+                                }
                                 let sprite = data.sprites.front_default
                                 if (shiny == 4096) {
                                     document.getElementById("pokemon" + i).src = data.sprites.front_shiny
@@ -91,7 +112,7 @@
                                 let index = 0;
                                 for (ability in data.abilities) {
                                     console.log(data.abilities[`${index}`])
-                                    abilities["" + i] = abilities["" + i] + data.abilities[`${index}`].ability.name.replace("-", " ") + "|"
+                                    abilities["" + i] = abilities["" + i] + "|" + data.abilities[`${index}`].ability.name.replace("-", " ") + "|"
                                     index++
                                 }
                                 let secondindex = 0
@@ -103,6 +124,7 @@
                                     }
                                 }
                                 defaults["" + i] = data.is_default
+                                highestsstats["" + i] = highest
                                 if (defaults["1"] == false) {
                                     url1 = "https://pokemondb.net/pokedex/" + pokemans["1"].split("-")[0]
                                 } else {
@@ -139,6 +161,7 @@
                     <p> Abilities: ${abilities["1"] || "Break the game"}</p>
                     <p> Height: ${Math.round(heights["1"] * 3.93701 * 10) / 10 || "???"} inches</p>
                     <p> Weight: ${Math.round(weights["1"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
+                    <p> Highest stat: ${highestsstats["1"] || "Every one of them"} ${highestsstatsnames["1"]}</p>
                     <a href="${url1}"target="_blank">More information</a>
                     `
                 });
@@ -159,6 +182,7 @@
                     <p> Abilities: ${abilities["2"] || "Break the game"}</p>
                     <p> Height: ${Math.round(heights["2"] * 3.93701 * 10) / 10 || "???"} inches</p>
                     <p> Weight: ${Math.round(weights["2"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
+                    <p> Highest stat: ${highestsstats["2"] || "Every one of them"} ${highestsstatsnames["2"]}</p>
                     <a href="${url2}" target="_blank">More information</a>
                     `
                 });
@@ -179,6 +203,7 @@
                     <p> Abilities: ${abilities["3"] || "Break the game"}</p>
                     <p> Height: ${Math.round(heights["3"] * 3.93701 * 10) / 10 || "???"} inches</p>
                     <p> Weight: ${Math.round(weights["3"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
+                    <p> Highest stat: ${highestsstats["3"] || "Every one of them"} ${highestsstatsnames["3"] || "e"} </p>
                     <a href="${url3}" target="_blank">More information</a>
                     `
                 });
