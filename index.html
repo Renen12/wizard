@@ -92,7 +92,6 @@
                                 let highest = Math.max.apply(Math, bsts);
                                 console.log(highest, data.stats)
                                 for (let s = 0; s < 6; s++) {
-                                    //maybe wrong
                                     if (data.stats["" + s].base_stat == highest) {
                                         highestsstatsnames["" + i] = data.stats["" + s].stat.name
                                     }
