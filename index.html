@@ -53,12 +53,22 @@
                 "2": "",
                 "3": "",
             }
-            let highestsstats = {
+            let highesttats = {
                 "1": "",
                 "2": "",
                 "3": "",
             }
-            let highestsstatsnames = {
+            let highesttatsnames = {
+                "1": "",
+                "2": "",
+                "3": "",
+            }
+            let loweststats = {
+                "1": "",
+                "2": "",
+                "3": "",
+            }
+            let loweststatsnames = {
                 "1": "",
                 "2": "",
                 "3": "",
@@ -86,14 +96,24 @@
                             let stuff = obj.json()
                             stuff.then((data) => {
                                 let bsts = []
+                                let lowestbsts = []
                                 for (let bst = 0; bst < 6; bst++) {
                                     bsts.push(data.stats["" + bst].base_stat)
                                 }
+                                for (let bst = 0; bst < 6; bst++) {
+                                    lowestbsts.push(data.stats["" + bst].base_stat)
+                                }
+                                let lowest = Math.min(...lowestbsts)
                                 let highest = Math.max.apply(Math, bsts);
-                                console.log(highest, data.stats)
+                                console.log(lowest, data.stats)
                                 for (let s = 0; s < 6; s++) {
                                     if (data.stats["" + s].base_stat == highest) {
-                                        highestsstatsnames["" + i] = data.stats["" + s].stat.name.replace("-", " ")
+                                        highesttatsnames["" + i] = data.stats["" + s].stat.name.replace("-", " ")
+                                    }
+                                }
+                                for (let s = 0; s < 6; s++) {
+                                    if (data.stats["" + s].base_stat == lowest) {
+                                        loweststatsnames["" + i] = data.stats["" + s].stat.name.replace("-", " ")
                                     }
                                 }
                                 let sprite = data.sprites.front_default
@@ -123,7 +143,9 @@
                                     }
                                 }
                                 defaults["" + i] = data.is_default
-                                highestsstats["" + i] = highest
+                                highesttats["" + i] = highest
+                                loweststats["" + i] = lowest
+                                console.log(loweststats, lowest, lowestbsts)
                                 if (defaults["1"] == false) {
                                     url1 = "https://pokemondb.net/pokedex/" + pokemans["1"].split("-")[0]
                                 } else {
@@ -160,7 +182,8 @@
                     <p> Abilities: ${abilities["1"] || "Break the game"}</p>
                     <p> Height: ${heights["1"] / 10|| "???"} meters</p>
                     <p> Weight: ${Math.round(weights["1"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
-                    <p> Highest stat: ${highestsstats["1"] || "Every one of them"} ${highestsstatsnames["1"]}</p>
+                    <p> Highest stat: ${highesttats["1"] || "Every one of them"} ${highesttatsnames["1"]}</p>
+                    <p> Lowest stat: ${loweststats["1"] || "None"} ${loweststatsnames["1"]}</p>
                     <a href="${url1}"target="_blank">More information</a>
                     `
                 });
@@ -181,7 +204,8 @@
                     <p> Abilities: ${abilities["2"] || "Break the game"}</p>
                     <p> Height: ${heights["2"] / 10|| "???"} meters</p>
                     <p> Weight: ${Math.round(weights["2"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
-                    <p> Highest stat: ${highestsstats["2"] || "Every one of them"} ${highestsstatsnames["2"]}</p>
+                    <p> Highest stat: ${highesttats["2"] || "Every one of them"} ${highesttatsnames["2"]}</p>
+                    <p> Lowest stat: ${loweststats["2"] || "None"} ${loweststatsnames["2"]}</p>
                     <a href="${url2}" target="_blank">More information</a>
                     `
                 });
@@ -202,7 +226,8 @@
                     <p> Abilities: ${abilities["3"] || "Break the game"}</p>
                     <p> Height: ${heights["3"] / 10|| "???"} meters</p>
                     <p> Weight: ${Math.round(weights["3"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
-                    <p> Highest stat: ${highestsstats["3"] || "Every one of them"} ${highestsstatsnames["3"] } </p>
+                    <p> Highest stat: ${highesttats["3"] || "Every one of them"} ${highesttatsnames["3"] } </p>
+                    <p> Lowest stat: ${loweststats["3"] || "None"} ${loweststatsnames["3"]}</p>
                     <a href="${url3}" target="_blank">More information</a>
                     `
                 });
