@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <button type="button" title="Get random ability" id="get">Get random ability</button>
+    <p id="ability"></p>
+    <script>
+        document.getElementById("get").onclick = () => {
+            fetch("https://pokeapi.co/api/v2/ability/?limit=307").then(function(obj) {
+                obj.json().then(function(json){
+                    let rand = Math.floor(Math.random() * 308);
+                    let ability = json.results["" + rand].name.replace("-", " ")
+                    document.getElementById("ability").innerText = ability
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
