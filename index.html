@@ -86,7 +86,7 @@
                             let stuff = obj.json()
                             stuff.then((data) => {
                                 let bsts = []
-                                for (let bst = 0; bst < 5; bst++) {
+                                for (let bst = 0; bst < 6; bst++) {
                                     bsts.push(data.stats["" + bst].base_stat)
                                 }
                                 let highest = Math.max.apply(Math, bsts);
@@ -203,7 +203,7 @@
                     <p> Abilities: ${abilities["3"] || "Break the game"}</p>
                     <p> Height: ${Math.round(heights["3"] * 3.93701 * 10) / 10 || "???"} inches</p>
                     <p> Weight: ${Math.round(weights["3"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
-                    <p> Highest stat: ${highestsstats["3"] || "Every one of them"} ${highestsstatsnames["3"] || "e"} </p>
+                    <p> Highest stat: ${highestsstats["3"] || "Every one of them"} ${highestsstatsnames["3"] } </p>
                     <a href="${url3}" target="_blank">More information</a>
                     `
                 });
