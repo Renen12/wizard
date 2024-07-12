@@ -93,7 +93,7 @@
                                 console.log(highest, data.stats)
                                 for (let s = 0; s < 6; s++) {
                                     if (data.stats["" + s].base_stat == highest) {
-                                        highestsstatsnames["" + i] = data.stats["" + s].stat.name
+                                        highestsstatsnames["" + i] = data.stats["" + s].stat.name.replace("-", " ")
                                     }
                                 }
                                 let sprite = data.sprites.front_default
@@ -106,8 +106,8 @@
                                 }
                                 pokemans["" + i] = data.name
                                 cries["" + i] = data.cries.latest
-                                weights["" + i] = Math.round(data.weight * 10) / 10
-                                heights["" + i] = Math.round(data.height * 10) / 10
+                                weights["" + i] = data.weight
+                                heights["" + i] = data.height
                                 let index = 0;
                                 for (ability in data.abilities) {
                                     console.log(data.abilities[`${index}`])
@@ -158,7 +158,7 @@
                     content: `
                     <audio src="${cries["1"] || "error.mp3"}" controls></audio>
                     <p> Abilities: ${abilities["1"] || "Break the game"}</p>
-                    <p> Height: ${Math.round(heights["1"] * 3.93701 * 10) / 10 || "???"} inches</p>
+                    <p> Height: ${heights["1"] / 10|| "???"} meters</p>
                     <p> Weight: ${Math.round(weights["1"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
                     <p> Highest stat: ${highestsstats["1"] || "Every one of them"} ${highestsstatsnames["1"]}</p>
                     <a href="${url1}"target="_blank">More information</a>
@@ -179,7 +179,7 @@
                     content: `
                     <audio src="${cries["2"] || "error.mp3"}" controls></audio>
                     <p> Abilities: ${abilities["2"] || "Break the game"}</p>
-                    <p> Height: ${Math.round(heights["2"] * 3.93701 * 10) / 10 || "???"} inches</p>
+                    <p> Height: ${heights["2"] / 10|| "???"} meters</p>
                     <p> Weight: ${Math.round(weights["2"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
                     <p> Highest stat: ${highestsstats["2"] || "Every one of them"} ${highestsstatsnames["2"]}</p>
                     <a href="${url2}" target="_blank">More information</a>
@@ -200,7 +200,7 @@
                     content: `
                     <audio src="${cries["3"] || "error.mp3"}" controls></audio>
                     <p> Abilities: ${abilities["3"] || "Break the game"}</p>
-                    <p> Height: ${Math.round(heights["3"] * 3.93701 * 10) / 10 || "???"} inches</p>
+                    <p> Height: ${heights["3"] / 10|| "???"} meters</p>
                     <p> Weight: ${Math.round(weights["3"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
                     <p> Highest stat: ${highestsstats["3"] || "Every one of them"} ${highestsstatsnames["3"] } </p>
                     <a href="${url3}" target="_blank">More information</a>
