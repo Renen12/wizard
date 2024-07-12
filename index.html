@@ -73,12 +73,19 @@
                 "2": "",
                 "3": "",
             }
-            onkeydown = (key) => {
+            let globalunique = []
+            const delay = ms => new Promise(res => setTimeout(res, ms));
+            onkeyup = async (key) => {
+                await delay(200)
                 //todo: encounter locations, unique for every round, abillity randomizer and stuff
                 if (key.key == "Enter") {
+                    abilities = {
+                        "1": "",
+                        "2": "",
+                        "3": "",
+                    }
                     // don't touch for heaven's sake
                     for (let i = 1; i < 4; i++) {
-                        abilities["" + i] = ""
                         let shiny = Math.floor(Math.random * 4096) + 1
                         let rand = Math.floor(Math.random() * 1025) + 1
                         // unique in current pair
@@ -88,6 +95,13 @@
                             }
                         })
                         unique.push(rand)
+                        // unique in every pair
+                        for (id in globalunique) {
+                            if (rand == id) {
+                                rand = Math.floor(Math.random() * 1025) + 1
+                            }
+                        }
+                        globalunique.push(rand)
                         let pkmn = fetch('https://pokeapi.co/api/v2/pokemon/' + rand.toString())
                         document.getElementById("pokemon1").src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
                         document.getElementById("pokemon2").src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
