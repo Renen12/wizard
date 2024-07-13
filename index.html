@@ -69,11 +69,6 @@
                 "2": "",
                 "3": "",
             }
-            let areas = {
-                "1": "",
-                "2": "",
-                "3": "",
-            }
             let count = 0;
             let globalunique = []
             onkeyup = (key) => {
@@ -105,9 +100,6 @@
                                     if (mon == rand) {
                                         console.log("found " + rand)
                                         rand = Math.floor(Math.random() * 1025) + 1
-                                        areas["1"] = ""
-                                        areas["2"] = ""
-                                        areas["1"] = ""
                                         roll()
                                     }
                                 }
@@ -134,16 +126,6 @@
                             pkmn.then((obj) => {
                                 let stuff = obj.json()
                                 stuff.then((data) => {
-                                    fetch(`https://pokeapi.co/api/v2/pokemon/${rand}/encounters`).then(function (obj) {
-                                        obj.json().then(function (json) {
-                                            try {
-                                                let area = json["0"].location_area.name.replaceAll("-", " ").replaceAll("-area", "");
-                                                areas["" + i] = area
-                                            } catch (error) {
-                                                
-                                            }
-                                        });
-                                    });
                                     let bsts = []
                                     let lowestbsts = []
                                     for (let bst = 0; bst < 6; bst++) {
@@ -207,9 +189,6 @@
                 let p1 = document.getElementById("pokemon1")
                 let p2 = document.getElementById("pokemon2")
                 let p3 = document.getElementById("pokemon3")
-                areas["1"] = ""
-                areas["2"] = ""
-                areas["1"] = ""
                 p1.onclick = () => {
                     const name1 = new Popup({
                         id: "name1",
@@ -220,7 +199,6 @@
                     <p> Weight: ${Math.round(weights["1"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
                     <p> Highest stat: ${highesttats["1"] || "Every one of them"} ${highesttatsnames["1"]}</p>
                     <p> Lowest stat: ${loweststats["1"] || "None"} ${loweststatsnames["1"]}</p>
-                    <p> Usually found in ${areas["1"] || "location data not available."} </p>
                     <a href="${url1}"target="_blank">More information</a>
                     `
                     });
@@ -242,7 +220,6 @@
                     <p> Weight: ${Math.round(weights["2"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
                     <p> Highest stat: ${highesttats["2"] || "Every one of them"} ${highesttatsnames["2"]}</p>
                     <p> Lowest stat: ${loweststats["2"] || "None"} ${loweststatsnames["2"]}</p>
-                    <p> Usually found in ${areas["2"] || "location data not available."} </p>
                     <a href="${url2}" target="_blank">More information</a>
                     `
                     });
@@ -264,7 +241,6 @@
                     <p> Weight: ${Math.round(weights["3"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
                     <p> Highest stat: ${highesttats["3"] || "Every one of them"} ${highesttatsnames["3"]} </p>
                     <p> Lowest stat: ${loweststats["3"] || "None"} ${loweststatsnames["3"]}</p>
-                    <p> Usually found in ${areas["3"] || "location data not available."} </p>
                     <a href="${url3}" target="_blank">More information</a>
                     `
                     });
