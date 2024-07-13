@@ -34,11 +34,6 @@
                 "2": "",
                 "3": "",
             }
-            let abilities = {
-                "1": "",
-                "2": "",
-                "3": "",
-            }
             let defaults = {
                 "1": "",
                 "2": "",
@@ -111,75 +106,15 @@
                             pkmn.then((obj) => {
                                 let stuff = obj.json()
                                 stuff.then((data) => {
-                                    notingen9.forEach(function (mon) {
+                                    if (localStorage.getItem("gen9") == "true") {
+                                        notingen9.forEach(function (mon) {
                                         if (data.name.toLowerCase() == mon.toLowerCase()) {
                                             rand = Math.floor(Math.random() * 1025) + 1
-                                            flag = true
+                                            location.reload()
                                         } else {
                                             console.log(mon, data.name)
                                         }
                                     });
-                                    if (flag == true) {
-                                        url1 = ""
-                                        url2 = ""
-                                        url3 = ""
-                                        unique = []
-                                        pokemans = {
-                                            "1": "",
-                                            "2": "",
-                                            "3": "",
-                                        }
-                                        cries = {
-                                            "1": "",
-                                            "2": "",
-                                            "3": "",
-                                        }
-                                        abilities = {
-                                            "1": "",
-                                            "2": "",
-                                            "3": "",
-                                        }
-                                        defaults = {
-                                            "1": "",
-                                            "2": "",
-                                            "3": "",
-                                        }
-                                        weights = {
-                                            "1": "",
-                                            "2": "",
-                                            "3": "",
-                                        }
-                                        heights = {
-                                            "1": "",
-                                            "2": "",
-                                            "3": "",
-                                        }
-                                        highesttats = {
-                                            "1": "",
-                                            "2": "",
-                                            "3": "",
-                                        }
-                                        highesttatsnames = {
-                                            "1": "",
-                                            "2": "",
-                                            "3": "",
-                                        }
-                                        loweststats = {
-                                            "1": "",
-                                            "2": "",
-                                            "3": "",
-                                        }
-                                        loweststatsnames = {
-                                            "1": "",
-                                            "2": "",
-                                            "3": "",
-                                        }
-                                        areas = {
-                                            "1": "",
-                                            "2": "",
-                                            "3": "",
-                                        }
-                                        roll()
                                     }
                                     let bsts = []
                                     let lowestbsts = []
@@ -223,19 +158,6 @@
                                             }
                                         });
                                     });
-                                    let index = 0;
-                                    for (ability in data.abilities) {
-                                        abilities["" + i] = abilities["" + i] + "|" + data.abilities[`${index}`].ability.name.replaceAll("-", " ") + "|"
-                                        index++
-                                    }
-                                    let secondindex = 0
-                                    for (a in abilities) {
-                                        if (abilities[secondindex] != a) {
-                                            secondindex++
-                                        } else {
-                                            abilities[secondindex] = data.abilities[0]
-                                        }
-                                    }
                                     defaults["" + i] = data.is_default
                                     highesttats["" + i] = highest
                                     loweststats["" + i] = lowest
@@ -273,7 +195,6 @@
                         title: pokemans["1"] || "MissingNo",
                         content: `
                     <audio src="${cries["1"] || "error.mp3"}" controls></audio>
-                    <p> Abilities: ${abilities["1"] || "Break the game"}</p>
                     <p> Height: ${heights["1"] / 10 || "???"} meters</p>
                     <p> Weight: ${Math.round(weights["1"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
                     <p> Highest stat: ${highesttats["1"] || "Every one of them"} ${highesttatsnames["1"]}</p>
@@ -296,7 +217,6 @@
                         title: pokemans["2"] || "MissingNo",
                         content: `
                     <audio src="${cries["2"] || "error.mp3"}" controls></audio>
-                    <p> Abilities: ${abilities["2"] || "Break the game"}</p>
                     <p> Height: ${heights["2"] / 10 || "???"} meters</p>
                     <p> Weight: ${Math.round(weights["2"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
                     <p> Highest stat: ${highesttats["2"] || "Every one of them"} ${highesttatsnames["2"]}</p>
@@ -319,7 +239,6 @@
                         title: pokemans["3"] || "MissingNo",
                         content: `
                     <audio src="${cries["3"] || "error.mp3"}" controls></audio>
-                    <p> Abilities: ${abilities["3"] || "Break the game"}</p>
                     <p> Height: ${heights["3"] / 10 || "???"} meters</p>
                     <p> Weight: ${Math.round(weights["3"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
                     <p> Highest stat: ${highesttats["3"] || "Every one of them"} ${highesttatsnames["3"]} </p>

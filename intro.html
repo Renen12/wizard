@@ -12,6 +12,11 @@
     <img src="logo.png" alt="The wizard logo" class="logo">
     <h1 class="enter">Press enter to begin</h1>
     <button type="button" id="ability">Open ability randomizer</button>
+    <br>
+    <button type="button" id="disablegen9">Disable only gen 9 Pokémon</button>
+    <br>
+    <button type="button" id="enablegen9">[BETA] Enable only gen 9 Pokémon (warning: it may take several tries to get a starter round with only such Pokémon.)</button>
+    <br>
     <script>
         onkeydown = (key) => {
             if (key.key == "Enter") {
@@ -20,6 +25,12 @@
         }
         document.getElementById("ability").onclick = () => {
             window.location = "ability.html"
+        }
+        document.getElementById("enablegen9").onclick = () => {
+            localStorage.setItem("gen9", true)
+        }
+        document.getElementById("disablegen9").onclick = () => {
+            localStorage.setItem("gen9", false)
         }
     </script>
 </body>
