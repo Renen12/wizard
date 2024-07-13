@@ -76,7 +76,21 @@
             }
             let count = 0;
             let globalunique = []
-            onkeyup = async (key) => {
+            onkeyup = (key) => {
+                function sleep(milliseconds) {
+                    var start = new Date().getTime();
+                    for (var i = 0; i < 1e7; i++) {
+                        if ((new Date().getTime() - start) > milliseconds) {
+                            break;
+                        }
+                    }
+                }
+                try {
+                    sleep(200)
+                } catch (error) {
+                    alert("Stop spamming the enter key!")
+                    window.close()
+                }
                 function roll() {
                     if (key.repeat) { return }
                     if (key.key == "Enter") {
@@ -84,6 +98,20 @@
                         for (let i = 1; i < 4; i++) {
                             let shiny = Math.floor(Math.random * 4096) + 1
                             let rand = Math.floor(Math.random() * 1025) + 1
+                            const diff = (diffMe, diffBy) => diffMe.split(diffBy).join('')
+                            if (localStorage.getItem("gen9") == "true") {
+                                for (let x = 0; x < notingen9.length - 1; x++) {
+                                    let mon = notingen9[x]
+                                    if (mon == rand) {
+                                        console.log("found " + rand)
+                                        rand = Math.floor(Math.random() * 1025) + 1
+                                        areas["1"] = ""
+                                        areas["2"] = ""
+                                        areas["1"] = ""
+                                        roll()
+                                    }
+                                }
+                            }
                             // unique in current pair
                             unique.forEach(function (item) {
                                 if (rand == item) {
@@ -106,16 +134,16 @@
                             pkmn.then((obj) => {
                                 let stuff = obj.json()
                                 stuff.then((data) => {
-                                    if (localStorage.getItem("gen9") == "true") {
-                                        notingen9.forEach(function (mon) {
-                                        if (data.name.toLowerCase() == mon.toLowerCase()) {
-                                            rand = Math.floor(Math.random() * 1025) + 1
-                                            location.reload()
-                                        } else {
-                                            console.log(mon, data.name)
-                                        }
+                                    fetch(`https://pokeapi.co/api/v2/pokemon/${rand}/encounters`).then(function (obj) {
+                                        obj.json().then(function (json) {
+                                            try {
+                                                let area = json["0"].location_area.name.replaceAll("-", " ").replaceAll("-area", "");
+                                                areas["" + i] = area
+                                            } catch (error) {
+                                                
+                                            }
+                                        });
                                     });
-                                    }
                                     let bsts = []
                                     let lowestbsts = []
                                     for (let bst = 0; bst < 6; bst++) {
@@ -148,16 +176,6 @@
                                     cries["" + i] = data.cries.latest
                                     weights["" + i] = data.weight
                                     heights["" + i] = data.height
-                                    fetch(`https://pokeapi.co/api/v2/pokemon/${rand}/encounters`).then(function (obj) {
-                                        obj.json().then(function (json) {
-                                            try {
-                                                let area = json["0"].location_area.name.replaceAll("-", " ").replaceAll("-area", "");
-                                                areas["" + i] = area
-                                            } catch (error) {
-                                                console.log(`Reason why fetching ${data.name} doesn't work: ${error}. (probably because of the api failing to provide information.)`)
-                                            }
-                                        });
-                                    });
                                     defaults["" + i] = data.is_default
                                     highesttats["" + i] = highest
                                     loweststats["" + i] = lowest
@@ -189,6 +207,9 @@
                 let p1 = document.getElementById("pokemon1")
                 let p2 = document.getElementById("pokemon2")
                 let p3 = document.getElementById("pokemon3")
+                areas["1"] = ""
+                areas["2"] = ""
+                areas["1"] = ""
                 p1.onclick = () => {
                     const name1 = new Popup({
                         id: "name1",
