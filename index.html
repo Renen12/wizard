@@ -94,9 +94,10 @@
                             let shiny = Math.floor(Math.random * 4096) + 1
                             let rand = Math.floor(Math.random() * 1025) + 1
                             const diff = (diffMe, diffBy) => diffMe.split(diffBy).join('')
-                            if (localStorage.getItem("gen9") == "true") {
+                            if (localStorage.getItem("gen9") == "true") {   
                                 for (let x = 0; x < notingen9.length - 1; x++) {
                                     let mon = notingen9[x]
+                                    console.log(rand, mon)
                                     if (mon == rand) {
                                         console.log("found " + rand)
                                         rand = Math.floor(Math.random() * 1025) + 1
@@ -221,7 +222,7 @@
                     <p> Highest stat: ${highesttats["2"] || "Every one of them"} ${highesttatsnames["2"]}</p>
                     <p> Lowest stat: ${loweststats["2"] || "None"} ${loweststatsnames["2"]}</p>
                     <a href="${url2}" target="_blank">More information</a>
-                    `
+                    `,
                     });
                     name2.show()
                     document.onkeydown = (k) => {

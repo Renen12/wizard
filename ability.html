@@ -2,6 +2,7 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="ability.css">
 </head>
 
 <body>
@@ -13,7 +14,8 @@
                 obj.json().then(function(json){
                     let rand = Math.floor(Math.random() * 308);
                     let ability = json.results["" + rand].name.replace("-", " ")
-                    document.getElementById("ability").innerText = ability
+                    alert(ability)
+                    return
                 });
             });
         }
