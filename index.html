@@ -147,9 +147,9 @@
                                             loweststatsnames["" + i] = data.stats["" + s].stat.name.replaceAll("-", " ")
                                         }
                                     }
-                                    let sprite = data.sprites.front_default
+                                    let sprite = data.sprites.other["official-artwork"].front_default
                                     if (shiny == 4096) {
-                                        document.getElementById("pokemon" + i).src = data.sprites.front_shiny
+                                        document.getElementById("pokemon" + i).src = data.sprites.other["official-artwork"].front_shiny
                                         console.log(`A shiny ${data.name} has appeared!`)
                                     } else {
                                         document.getElementById("pokemon" + i).src = sprite
