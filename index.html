@@ -69,6 +69,11 @@
                 "2": "",
                 "3": "",
             }
+            let combinedstats = {
+                "1": "",
+                "2": "",
+                "3": "",
+            }
             let count = 0;
             let globalunique = []
             onkeyup = (key) => {
@@ -156,6 +161,7 @@
                                         console.log(`${data.name}:`, data)
                                     }
                                     pokemans["" + i] = data.name
+                                    combinedstats["" + i] = data.stats[0].base_stat + data.stats[1].base_stat + data.stats[2].base_stat + data.stats[3].base_stat + data.stats[4].base_stat + data.stats[5].base_stat
                                     cries["" + i] = data.cries.latest
                                     weights["" + i] = data.weight
                                     heights["" + i] = data.height
@@ -200,6 +206,7 @@
                     <p> Weight: ${Math.round(weights["1"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
                     <p> Highest stat: ${highesttats["1"] || "Every one of them"} ${highesttatsnames["1"]}</p>
                     <p> Lowest stat: ${loweststats["1"] || "None"} ${loweststatsnames["1"]}</p>
+                    <p> Base stat total: ${combinedstats["1"] || "9999999999999"} </p>
                     <a href="${url1}"target="_blank">More information</a>
                     `
                     });
@@ -221,6 +228,7 @@
                     <p> Weight: ${Math.round(weights["2"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
                     <p> Highest stat: ${highesttats["2"] || "Every one of them"} ${highesttatsnames["2"]}</p>
                     <p> Lowest stat: ${loweststats["2"] || "None"} ${loweststatsnames["2"]}</p>
+                    <p> Base stat total: ${combinedstats["2"] || "9999999999999"} </p>
                     <a href="${url2}" target="_blank">More information</a>
                     `,
                     });
@@ -242,6 +250,7 @@
                     <p> Weight: ${Math.round(weights["3"] * 0.2204622622 * 10) / 10 || "???"} pounds </p>
                     <p> Highest stat: ${highesttats["3"] || "Every one of them"} ${highesttatsnames["3"]} </p>
                     <p> Lowest stat: ${loweststats["3"] || "None"} ${loweststatsnames["3"]}</p>
+                    <p> Base stat total: ${combinedstats["3"] || "9999999999999"} </p>
                     <a href="${url3}" target="_blank">More information</a>
                     `
                     });
