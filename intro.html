@@ -1,38 +1,36 @@
 <html>
+    <head>
+        <link rel="stylesheet" href="intro.css" />
+        <title>Wizard</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    </head>
 
-<head>
-    <link rel="stylesheet" href="intro.css">
-    <title>
-        Wizard
-    </title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-</head>
-
-<body>
-    <img src="logo.png" alt="The wizard logo" class="logo">
-    <h1 class="enter">Press enter to begin</h1>
-    <button type="button" id="ability">Open ability randomizer</button>
-    <br>
-    <button type="button" id="disablegen9">Disable only gen 9 Pokémon</button>
-    <br>
-    <button type="button" id="enablegen9">[BETA] Enable only gen 9 Pokémon (may cause performance issues and bugs.)</button>
-    <br>
-    <script>
-        onkeydown = (key) => {
-            if (key.key == "Enter") {
-                window.location = "index.html"
-            }
-        }
-        document.getElementById("ability").onclick = () => {
-            window.location = "ability.html"
-        }
-        document.getElementById("enablegen9").onclick = () => {
-            localStorage.setItem("gen9", true)
-        }
-        document.getElementById("disablegen9").onclick = () => {
-            localStorage.setItem("gen9", false)
-        }
-    </script>
-</body>
-
+    <body>
+        <img src="logo.png" alt="The wizard logo" class="logo" />
+        <h1 class="enter">Press enter to begin</h1>
+        <button type="button" id="ability">Open ability randomizer</button>
+        <br />
+        <button type="button" id="disablegen9">
+            Disable only gen 9 Pokémon
+        </button>
+        <br />
+        <button type="button" id="enablegen9">Enable only gen 9 Pokémon</button>
+        <br />
+        <script>
+            onkeydown = (key) => {
+                if (key.key == "Enter") {
+                    window.location = "index.html";
+                }
+            };
+            document.getElementById("ability").onclick = () => {
+                window.location = "ability.html";
+            };
+            document.getElementById("enablegen9").onclick = () => {
+                localStorage.setItem("gen9", true);
+            };
+            document.getElementById("disablegen9").onclick = () => {
+                localStorage.setItem("gen9", false);
+            };
+        </script>
+    </body>
 </html>
